@@ -1,13 +1,15 @@
 'use strict';
 
 const secretNumber = Math.trunc(Math.random() * 20 + 1);
-const highestScore = 20;
-let score = highestScore;
+const score = 20;
+let actualScore = score;
 let message = document.querySelector('.message').textContent;
 
-const decreaseScore = () => {
-	score--;
-	document.querySelector('.score').textContent = score;
+const decreaseActualScore = () => {
+	console.log('before', actualScore);
+	actualScore--;
+	console.log('after', actualScore);
+	document.querySelector('.score').textContent = actualScore;
 };
 
 const messageText = (text) => {
@@ -26,8 +28,14 @@ const changeNumberWidth = (width) => {
 	document.querySelector('.number').style.width = width;
 };
 
-const changeScore = (score) => {
-	document.querySelector('.score').textContent = score;
+const initializeActualScore = () => {
+	actualScore = score;
+	document.querySelector('.score').textContent = actualScore;
+};
+
+const disableCheckButton = (disable) => {
+	const checkButton = document.querySelector('.check');
+	checkButton.disabled = disable;
 };
 
 document.querySelector('.check').addEventListener('click', function () {
@@ -42,15 +50,14 @@ document.querySelector('.check').addEventListener('click', function () {
 		changeNumberWidth('30rem');
 	} else if (guess > secretNumber) {
 		messageText('Too High!');
-		decreaseScore();
+		decreaseActualScore();
 	} else if (guess < secretNumber) {
 		messageText('Too Low!');
-		decreaseScore();
+		decreaseActualScore();
 	}
 
-	if (score <= 0) {
-		const checkButton = document.querySelector('.check');
-		checkButton.disabled = true;
+	if (actualScore <= 0) {
+		disableCheckButton(true);
 		document.querySelector('.message').textContent = 'You Lose';
 	}
 });
@@ -60,5 +67,7 @@ document.querySelector('.again').addEventListener('click', function () {
 	changeBackgroundColor('#222');
 	changeNumberText('?');
 	changeNumberWidth('15rem');
-	changeScore(highestScore);
+	initializeActualScore();
+	disableCheckButton(false);
+	document.querySelector('.guess').value = '';
 });
