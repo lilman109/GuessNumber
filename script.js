@@ -59,4 +59,8 @@ document.querySelector('.check').addEventListener('click', function () {
 
 document.querySelector('.again').addEventListener('click', function () {
 	messageText('Start guessing....');
+	changeBackgroundColor('#222');
+	changeNumberText('?');
+	changeNumberWidth('15rem');
+	changeScore(highestScore);
 });
