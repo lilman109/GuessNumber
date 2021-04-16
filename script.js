@@ -33,10 +33,6 @@ const changeScore = (score) => {
 document.querySelector('.check').addEventListener('click', function () {
 	const guess = Number(document.querySelector('.guess').value);
 
-	if (score <= 0) {
-		return;
-	}
-
 	if (!guess) {
 		messageText('No Number!');
 	} else if (guess === secretNumber) {
@@ -53,6 +49,8 @@ document.querySelector('.check').addEventListener('click', function () {
 	}
 
 	if (score <= 0) {
+		const checkButton = document.querySelector('.check');
+		checkButton.disabled = true;
 		document.querySelector('.message').textContent = 'You Lose';
 	}
 });
