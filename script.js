@@ -1,14 +1,12 @@
 'use strict';
 
-const secretNumber = Math.trunc(Math.random() * 20 + 1);
-const score = 20;
+const score = document.querySelector('.score').innerHTML;
+const secretNumber = Math.trunc(Math.random() * score + 1);
 let actualScore = score;
 let message = document.querySelector('.message').textContent;
 
 const decreaseActualScore = () => {
-	console.log('before', actualScore);
 	actualScore--;
-	console.log('after', actualScore);
 	document.querySelector('.score').textContent = actualScore;
 };
 
