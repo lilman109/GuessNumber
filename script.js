@@ -44,7 +44,7 @@ const saveScore = (score) => {
 	}
 };
 
-document.querySelector('.check').addEventListener('click', function () {
+const checkNumber = () => {
 	const guess = Number(document.querySelector('.guess').value);
 
 	if (!guess) {
@@ -55,6 +55,7 @@ document.querySelector('.check').addEventListener('click', function () {
 		changeBackgroundColor('#60b347');
 		changeNumberWidth('30rem');
 		saveScore(actualScore);
+		disableCheckButton(true);
 	} else if (guess !== secretNumber) {
 		const message = guess > secretNumber ? 'Too High!' : 'Too Low!';
 		messageText(message);
@@ -64,6 +65,14 @@ document.querySelector('.check').addEventListener('click', function () {
 	if (actualScore <= 0) {
 		disableCheckButton(true);
 		document.querySelector('.message').textContent = 'You Lose';
+	}
+};
+
+document.querySelector('.check').addEventListener('click', checkNumber);
+
+document.querySelector('.guess').addEventListener('keypress', (e) => {
+	if (e.key === 'Enter') {
+		checkNumber();
 	}
 });
 
