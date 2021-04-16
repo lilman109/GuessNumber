@@ -38,6 +38,14 @@ const disableCheckButton = (disable) => {
 	checkButton.disabled = disable;
 };
 
+const saveScore = (score) => {
+	let highScore = document.querySelector('.highscore').innerHTML;
+	if (score > highScore) {
+		highScore = score;
+		document.querySelector('.highscore').textContent = highScore;
+	}
+};
+
 document.querySelector('.check').addEventListener('click', function () {
 	const guess = Number(document.querySelector('.guess').value);
 
@@ -48,6 +56,7 @@ document.querySelector('.check').addEventListener('click', function () {
 		changeNumberText(secretNumber);
 		changeBackgroundColor('#60b347');
 		changeNumberWidth('30rem');
+		saveScore(actualScore);
 	} else if (guess > secretNumber) {
 		messageText('Too High!');
 		decreaseActualScore();
