@@ -55,11 +55,9 @@ document.querySelector('.check').addEventListener('click', function () {
 		changeBackgroundColor('#60b347');
 		changeNumberWidth('30rem');
 		saveScore(actualScore);
-	} else if (guess > secretNumber) {
-		messageText('Too High!');
-		decreaseActualScore();
-	} else if (guess < secretNumber) {
-		messageText('Too Low!');
+	} else if (guess !== secretNumber) {
+		const message = guess > secretNumber ? 'Too High!' : 'Too Low!';
+		messageText(message);
 		decreaseActualScore();
 	}
 
